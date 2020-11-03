@@ -1,0 +1,79 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+  <script type="text/javascript">
+  var ws;
+	function getcon(){
+	     data=document.getElementById("a").value;
+		   ws= new WebSocket(data);
+		   ws.open=function (ev){
+       ws.send("1");
+			 alert("连接ok");
+       }
+};
+
+
+function getnmsg(){
+  ws.send("*,1,N_Data");
+  ws.onmessage = function(event) {
+			  alert(event.data);
+			}
+};
+function getpmsg(){
+  ws.send("*,1,P_Data");
+  ws.onmessage = function(event) {
+			  alert(event.data);
+			}
+};
+function getkmsg(){
+  ws.send("*,1,K_Data");
+  ws.onmessage = function(event) {
+			  alert(event.data);
+			}
+};
+function getallmsg(){
+  ws.send("*,1,All_Data");
+  ws.onmessage = function(event) {
+			  alert(event.data);
+			}
+};
+function send(){
+  ws.send(b.value);
+  ws.onmessage = function(event) {
+			  alert(event.data);
+			}
+};
+function ready(){
+  ws.send("Send,1");
+  ws.onmessage = function(event) {
+			  alert(event.data);
+			}
+};
+function quit(){
+  ws.send("quit");
+  ws.onmessage = function(event) {
+			  alert(event.data);
+			}
+};
+
+</script>
+</head>
+
+<body>
+<input id="a" type="text" name="ipaddress" value="ws://10.191.17.10:8889">
+<button value="test0" onclick="getcon()">"连接"</button>
+<button value="test1" onclick="getnmsg()">N</button>
+<button value="test2" onclick="getpmsg()">P</button>
+<button value="test3" onclick="getkmsg()">K</button>
+<button value="test4" onclick="getallmsg()">All_Data</button>
+<br>
+<button value="test6" onclick="ready()">开始</button>
+<input id="b" type="text" name="i" value="">
+<button value="test5" onclick="send()">发送</button>
+<button value="test7" onclick="quit()">结束</button>
+<div id="msg">
+
+</div>
+</body>
+</html>
